@@ -2,6 +2,7 @@
 
 import sys
 
+
 def translate_sequence(rna_sequence, genetic_code):
     """Translates a sequence of RNA into a sequence of amino acids.
 
@@ -13,8 +14,20 @@ def translate_sequence(rna_sequence, genetic_code):
     If `rna_sequence` is less than 3 bases long, or starts with a stop codon,
     an empty string is returned.
     """
-    print (genetic_code[rna_sequence])
-    return genetic_code[rna_sequence]
+    seq = rna_sequence.upper()
+    for base in seq:
+        if genetic_code == None:
+            return False
+        elif len(seq) > 3:
+            return False
+        elif base == "*":
+            return
+        elif base not in 'UCAGucag':
+            return False
+        
+
+        print (genetic_code[seq])
+        return genetic_code[seq]
 
 
 
