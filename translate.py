@@ -20,12 +20,10 @@ def translate_sequence(rna_sequence, genetic_code):
             return False
         elif len(seq) > 3:
             return False
-        elif base == "*":
+        elif base[] == "*":
             return
         elif base not in 'UCAGucag':
             return False
-        
-
         print (genetic_code[seq])
         return genetic_code[seq]
 
