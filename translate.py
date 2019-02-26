@@ -3,7 +3,20 @@
 import sys
 
 
+#def translate_RNA_codon(genetic_code):
+#    return RNA_codon_table[genetic_code]
+
 def translate_sequence(rna_sequence, genetic_code):
+    def translate_RNA_codon(codon):
+        return genetic_code[codon]
+    print(rna_sequence)
+    translation = ''
+    for n in range(0, len(rna_sequence)-(len(rna_sequence) % 3), 3):
+        translation += translate_RNA_codon(rna_sequence.upper()[n:n+3])
+#    print(translation)
+    return translation
+
+#def translate_sequence(rna_sequence, genetic_code):
     """Translates a sequence of RNA into a sequence of amino acids.
 
     Translates `rna_sequence` into string of amino acids, according to the
@@ -14,18 +27,18 @@ def translate_sequence(rna_sequence, genetic_code):
     If `rna_sequence` is less than 3 bases long, or starts with a stop codon,
     an empty string is returned.
     """
-    seq = rna_sequence.upper()
-    for base in seq:
-        if genetic_code == None:
-            return False
-        elif len(seq) > 3:
-            return False
-        elif base[] == "*":
-            return
-        elif base not in 'UCAGucag':
-            return False
-        print (genetic_code[seq])
-        return genetic_code[seq]
+#    seq = rna_sequence.upper()
+#    for base in seq:
+#        if genetic_code == None:
+#            return False
+#        elif len(seq) < 3:
+#            return False
+#        elif base == "*":
+#            return
+#        elif base not in 'UCAGucag':
+#            return False
+#        print (genetic_code[seq])
+#        return genetic_code[seq]
 
 
 
@@ -93,7 +106,11 @@ def get_longest_peptide(rna_sequence, genetic_code):
 
 
 if __name__ == '__main__':
-    genetic_code = {'GUC': 'V', 'ACC': 'T', 'GUA': 'V', 'GUG': 'V', 'ACU': 'T', 'AAC': 'N', 'CCU': 'P', 'UGG': 'W', 'AGC': 'S', 'AUC': 'I', 'CAU': 'H', 'AAU': 'N', 'AGU': 'S', 'GUU': 'V', 'CAC': 'H', 'ACG': 'T', 'CCG': 'P', 'CCA': 'P', 'ACA': 'T', 'CCC': 'P', 'UGU': 'C', 'GGU': 'G', 'UCU': 'S', 'GCG': 'A', 'UGC': 'C', 'CAG': 'Q', 'GAU': 'D', 'UAU': 'Y', 'CGG': 'R', 'UCG': 'S', 'AGG': 'R', 'GGG': 'G', 'UCC': 'S', 'UCA': 'S', 'UAA': '*', 'GGA': 'G', 'UAC': 'Y', 'GAC': 'D', 'UAG': '*', 'AUA': 'I', 'GCA': 'A', 'CUU': 'L', 'GGC': 'G', 'AUG': 'M', 'CUG': 'L', 'GAG': 'E', 'CUC': 'L', 'AGA': 'R', 'CUA': 'L', 'GCC': 'A', 'AAA': 'K', 'AAG': 'K', 'CAA': 'Q', 'UUU': 'F', 'CGU': 'R', 'CGC': 'R', 'CGA': 'R', 'GCU': 'A', 'GAA': 'E', 'AUU': 'I', 'UUG': 'L', 'UUA': 'L', 'UGA': '*', 'UUC': 'F'}
+    genetic_code = {'GUC': 'V', 'ACC': 'T', 'GUA': 'V', 'GUG': 'V', 'ACU': 'T', 'AAC': 'N', 'CCU': 'P', 'UGG': 'W', 'AGC': 'S', 'AUC': 'I', 'CAU': 'H', 'AAU': 'N', 'AGU': 'S', 'GUU': 'V', 'CAC': 'H',
+ 'ACG': 'T', 'CCG': 'P', 'CCA': 'P', 'ACA': 'T', 'CCC': 'P', 'UGU': 'C', 'GGU': 'G', 'UCU': 'S', 'GCG': 'A', 'UGC': 'C', 'CAG': 'Q', 'GAU': 'D', 'UAU': 'Y', 'CGG': 'R', 'UCG': 'S', 'AGG': 'R',
+ 'GGG': 'G', 'UCC': 'S', 'UCA': 'S', 'UAA': '*', 'GGA': 'G', 'UAC': 'Y', 'GAC': 'D', 'UAG': '*', 'AUA': 'I', 'GCA': 'A', 'CUU': 'L', 'GGC': 'G', 'AUG': 'M', 'CUG': 'L', 'GAG': 'E', 'CUC': 'L',
+ 'AGA': 'R', 'CUA': 'L', 'GCC': 'A', 'AAA': 'K', 'AAG': 'K', 'CAA': 'Q', 'UUU': 'F', 'CGU': 'R', 'CGC': 'R', 'CGA': 'R', 'GCU': 'A', 'GAA': 'E', 'AUU': 'I', 'UUG': 'L', 'UUA': 'L',
+ 'UGA': '*', 'UUC': 'F'}
     rna_seq = ("AUG"
             "UAC"
             "UGG"
