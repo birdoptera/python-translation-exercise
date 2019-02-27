@@ -9,7 +9,7 @@ import sys
 def translate_sequence(rna_sequence, genetic_code):
     def translate_RNA_codon(codon):
         return genetic_code[codon]
-    print(rna_sequence)
+#    print(rna_sequence)
     translation = ''
     if len(rna_sequence) > 2:
         for n in range(0, len(rna_sequence)-(len(rna_sequence) % 3), 3):
@@ -18,10 +18,10 @@ def translate_sequence(rna_sequence, genetic_code):
             else:
                 translation += translate_RNA_codon(rna_sequence.upper()[n:n+3])
     else: return ''
-#    print(translation)
+
     return translation
 
-#def translate_sequence(rna_sequence, genetic_code):
+
     """Translates a sequence of RNA into a sequence of amino acids.
 
     Translates `rna_sequence` into string of amino acids, according to the
@@ -50,13 +50,32 @@ def get_all_translations(rna_sequence, genetic_code):
     If no amino acids can be translated from `rna_sequence`, an empty list is
     returned.
     """
-    rna_sequence.upper()
-    if "AUG" in rna_sequence:
-        start = rna_sequence.find("AUG")
-        return translate_sequence(rna_sequence[start:], genetic_code)
-    else:
-        return ''
-    pass
+    def translate_RNA_codon(codon):
+        return genetic_code[codon]
+    seq = rna_sequence.upper()
+    print(seq)
+    framenum = range(1,4)
+    for i in framenum:
+    
+        def translate_with_open_reading_frames(seq, framenum):
+            open = FALSE
+            translation = ""
+#        print(seq)
+            seqlength = len(seq) - (framenum-1) 
+            for n in range(framenum-1, seqlength- (seqlength % 3), 3):
+                codon = translate_RNA_codon(seq[n:n+3])
+                open = (open or codon == "M") and not (codon == "*")
+                translation += codon if open else "*"
+            return translation
+
+
+#    rna_sequence.upper()
+#    if "AUG" in rna_sequence:
+#        start = rna_sequence.find("AUG")
+#        return translate_sequence(rna_sequence[start:], genetic_code)
+#    else:
+#        return ''
+#    pass
 
 def get_reverse(sequence):
     """Reverse orientation of `sequence`.
