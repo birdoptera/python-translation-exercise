@@ -54,18 +54,15 @@ def get_all_translations(rna_sequence, genetic_code):
         return genetic_code[codon]
     seq = rna_sequence.upper()
     print(seq)
-    framenum = range(1,4)
+    framenum = list(range(1,4))
     for i in framenum:
-    
-        def translate_with_open_reading_frames(seq, framenum):
-            open = FALSE
-            translation = ""
-#        print(seq)
-            seqlength = len(seq) - (framenum-1) 
-            for n in range(framenum-1, seqlength- (seqlength % 3), 3):
-                codon = translate_RNA_codon(seq[n:n+3])
-                open = (open or codon == "M") and not (codon == "*")
-                translation += codon if open else "*"
+        open = False
+        translation = ""
+        seqlength = (len(seq) - (i-1))
+        for n in range(i-1, seqlength - (seqlength % 3), 3):
+            codon = translate_RNA_codon(seq[n:n+3])
+            open = (open or codon == "M") and not (codon == '')
+            translation += codon if open else ''
             return translation
 
 
