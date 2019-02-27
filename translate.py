@@ -54,16 +54,41 @@ def get_all_translations(rna_sequence, genetic_code):
         return genetic_code[codon]
     seq = rna_sequence.upper()
     print(seq)
-    framenum = list(range(1,4))
-    for i in framenum:
-        open = False
-        translation = ""
-        seqlength = (len(seq) - (i-1))
-        for n in range(i-1, seqlength - (seqlength % 3), 3):
-            codon = translate_RNA_codon(seq[n:n+3])
-            open = (open or codon == "M") and not (codon == '')
-            translation += codon if open else ''
-            return translation
+    # Get an empty list to store our translations in
+    list_of_peptides = []
+    # Figure out the index (position) of the last possible codon
+    seq_length = len(seq)
+    index_of_last_codon = seq_length - 3
+    # Loop over all possible positions that could be the start of a start codon
+    for base_index in range(index_of_last_codon + 1):
+        # get next codon by slicing next three nucleotides
+        codon = seq[base_index: base_index + 3]
+        # check if next codon is a start codon
+        if codon == "AUG":
+            # Now we are ready to translate and store the result in our list.
+            # Just inserting a print statement below, but you can replace this
+            # with code to do the translation and IF an amino acid sequence is
+            # returned, append it to 'list_of_peptides'
+            print(seq[base_index:])
+            peptide = translate_sequence(rna_sequence[base_index:], genetic_code)
+            if peptide != '':
+                list_of_peptides += peptide
+    return list_of_peptides
+
+#    def translate_RNA_codon(codon):
+#        return genetic_code[codon]
+#    seq = rna_sequence.upper()
+#    print(seq)
+#    framenum = list(range(1,4))
+#    for i in framenum:
+#        open = False
+#        translation = ""
+#        seqlength = (len(seq) - (i-1))
+#        for n in range(i-1, seqlength - (seqlength % 3), 3):
+#            codon = translate_RNA_codon(seq[n:n+3])
+#            open = (open or codon == "M") and not (codon == '')
+#            translation += codon if open else ''
+#            return translation
 
 
 #    rna_sequence.upper()
@@ -152,6 +177,53 @@ def get_longest_peptide(rna_sequence, genetic_code):
     If no amino acids can be translated from `rna_sequence` nor its reverse and
     complement, an empty list is returned.
     """
+    def translate_RNA_codon(codon):
+        return genetic_code[codon]
+   
+    sequence1 = rna_sequence.upper()
+
+    sequence2 = rna_sequence.upper()
+    sequence2 = sequence2[::-1]
+
+    sequence3  = rna_sequence.upper()
+    sequence3 = sequence3.replace('A', 'W')
+    sequence3 = sequence3.replace('G', 'X')
+    sequence3 = sequence3.replace('C', 'Y')
+    sequence3 = sequence3.replace('U', 'Z')
+    sequence3 = sequence3.replace('W', 'U')
+    sequence3 = sequence3.replace('X', 'C')
+    sequence3 = sequence3.replace('Y', 'G')
+    sequence3 = sequence3.replace('Z', 'A')
+
+    sequence4 = rna_sequence.upper()
+    sequence4 = sequence4[::-1]
+
+    sequence4 = sequence4.replace('A', 'W')
+    sequence4 = sequence4.replace('G', 'X')
+    sequence4 = sequence4.replace('C', 'Y')
+    sequence4 = sequence4.replace('U', 'Z')
+    sequence4 = sequence4.replace('W', 'U')
+    sequence4 = sequence4.replace('X', 'C')
+    sequence4 = sequence4.replace('Y', 'G')
+    sequence4 = sequence4.replace('Z', 'A')
+
+    sequences = [sequence1, sequence2, sequence3, sequence4]
+    for seq in sequences:
+        list_of_peptides = []
+        seq_length = len(seq)
+        index_of_last_codon = seq_length - 3
+        for base_index in range(index_of_last_codon + 1):
+            codon = seq[base_index: base_index + 3]
+            if codon == "AUG":
+                print(codon)
+                peptide = translate_sequence(rna_sequence[base_index:], genetic_code)
+                if peptide != '':
+                    list_of_peptides += peptide
+
+    longest_peptide = max(list_of_peptides, key=len)
+    return longest_peptide
+
+
     pass
 
 
