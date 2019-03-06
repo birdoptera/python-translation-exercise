@@ -75,30 +75,6 @@ def get_all_translations(rna_sequence, genetic_code):
                 list_of_peptides += peptide
     return list_of_peptides
 
-#    def translate_RNA_codon(codon):
-#        return genetic_code[codon]
-#    seq = rna_sequence.upper()
-#    print(seq)
-#    framenum = list(range(1,4))
-#    for i in framenum:
-#        open = False
-#        translation = ""
-#        seqlength = (len(seq) - (i-1))
-#        for n in range(i-1, seqlength - (seqlength % 3), 3):
-#            codon = translate_RNA_codon(seq[n:n+3])
-#            open = (open or codon == "M") and not (codon == '')
-#            translation += codon if open else ''
-#            return translation
-
-
-#    rna_sequence.upper()
-#    if "AUG" in rna_sequence:
-#        start = rna_sequence.find("AUG")
-#        return translate_sequence(rna_sequence[start:], genetic_code)
-#    else:
-#        return ''
-#    pass
-
 def get_reverse(sequence):
     """Reverse orientation of `sequence`.
 
@@ -114,6 +90,15 @@ def get_reverse(sequence):
     else:
         return ''
     pass
+
+#    sequence = sequence.upper()
+#    rev_seq = ""
+#    for c in sequence:
+#        rev_seq = c + rev_seq
+#    return rev_seq
+
+#    pass
+
 
 def get_complement(sequence):
     """Get the complement of `sequence`.
@@ -137,6 +122,18 @@ def get_complement(sequence):
     else:
         return ''
     pass
+
+# or
+#    sequence = sequence.upper()
+#    comp_bases = {
+#        'A' : 'U',
+#        'U' : 'A',
+#        'G' : 'T',
+#        'T' : 'G',
+#    comp_seq = ""
+#    for c in sequence:
+#        comp_seq += comp_bases[c]
+#    return comp_seq
 
 def reverse_and_complement(sequence):
     """Get the reversed and complemented form of `sequence`.
@@ -162,7 +159,8 @@ def reverse_and_complement(sequence):
 
     else:
         return ''
-   
+#   or
+#   return get_reverse(get_complement(sequence))
 
     pass
 
